@@ -10,6 +10,8 @@ namespace Demo
     {
         static void Main(string[] args)
         {
+            var manager = new ProducerConsumer();
+            manager.Start();
         }
     }
 }
