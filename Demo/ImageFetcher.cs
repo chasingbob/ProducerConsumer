@@ -24,7 +24,7 @@ namespace Demo
         {
             _batchSize = batchSize;
             _extension = extension;
-            _images = Directory.GetFiles(location, string.Format("*.{0}", extension), SearchOption.AllDirectories);
+            _images = Directory.GetFiles(location);
         }
 
         public async Task<List<ImageFilename>> FetchNextBatchAsync()

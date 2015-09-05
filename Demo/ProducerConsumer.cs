@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
@@ -13,13 +11,13 @@ namespace Demo
     {
         public bool IsRunning { get; set; }
         private readonly BlockingCollection<ImageFilename> _queue = new BlockingCollection<ImageFilename>();
-        private ImageFetcher fetcher = new ImageFetcher(2, @"c:\temp\images", "*.jpg");
+        private ImageFetcher fetcher = new ImageFetcher(2, @"C:\Temp\clowns", "*.jpg");
 
         public void Start()
         {
             IsRunning = true;
 
-            //  Fetch
+            // Producer
             Task.Run(async () =>
             {
                 while (IsRunning)
@@ -37,11 +35,11 @@ namespace Demo
                             imgs.ForEach(img => _queue.Add(img));
                     }
 
-                    Thread.Sleep(10);
+                    Thread.Sleep(100);
                 }
             });
 
-            Action process = () =>
+            Action consumer = () =>
             {
                 while (IsRunning)
                 {
@@ -54,9 +52,9 @@ namespace Demo
             };
 
             //  Single Process
-            //  Parallel.Invoke(process);
+            //  Parallel.Invoke(consumer);
             //  Concurrent
-            Parallel.Invoke(process, process,process,process);
+            Parallel.Invoke(consumer,consumer,consumer,consumer);
 
             Console.ReadKey();
         }
