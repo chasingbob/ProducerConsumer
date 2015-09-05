@@ -9,11 +9,11 @@ namespace Demo
 {
     public class ImageFetcher 
     {
-        private int _batchSize;
-        private string[] _images;
-        private int _pointer = 0;
-        private int _size = 0;
-        private string _extension;
+        int _batchSize;
+        string[] _images;
+        int _pointer = 0;
+        int _size = 0;
+        string _extension;
 
         public ImageFetcher()
         {
